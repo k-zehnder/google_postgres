@@ -29,6 +29,10 @@ class GoogleSheetHelper:
         rows = sheet.get_all_records()
         return pd.DataFrame(rows)
 
+    def viewAllClientSheets(self):
+        available_sheets = self.client.openall()
+        return [sheet.title for sheet in available_sheets]
+
 df1 = GoogleSheetHelper(cred_json, "google_postgres", "existing")
 df2 = GoogleSheetHelper(cred_json, "google_postgres", "calls")
 df3 = GoogleSheetHelper(cred_json, "google_postgres", "time")
@@ -38,6 +42,9 @@ print("*" * 50)
 print(df2.getDataframe().head())
 print("*" * 50)
 print(df3.getDataframe().head())
+
+all_sheets = df1.viewAllClientSheets()
+print(all_sheets)
 
 ###############################################################################
 # Now that we have data from googlesheetsAPI, insert to goanddo PostgresSQL
