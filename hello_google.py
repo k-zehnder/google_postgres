@@ -10,10 +10,7 @@ import datetime
 """
 # REMINDER: must share email located in key by pressing "share" button in google sheets to share with the credential email or it wont work!
 """
-
-# input
 cred_json = "/home/batman/Desktop/google_postgres/key/master_key.json" #cred_json = os.environ['json_path']
-# TODO: accept arguments to initialize class with kwawgs
 class GoogleSheetHelper:
     def __init__(self, cred_json, spreadsheetName, sheetName):
         self.scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
@@ -92,15 +89,6 @@ It is necessary to exclude all the code for working with Google spreadsheet and 
 Prepare function Init which will automatically migrate data from the current table structure to a new one do not miss existing data.
 As result, changes should make a backup of the data, create a new database with a new structure, and upload data from the backup.
 """
-
-# open all sheets and loop through printing each one
-# available_sheets = client.openall()
-# print([i for i in available_sheets])
-
-
-# dataframe_list = []
-# for i in available_sheets:
-#     dataframe = pd.DataFrame(i.get_all_records())
-#     dataframe_list.append(dataframe)
-# print([i for i in dataframe_list])
-
+"""
+# REMINDER: must share email located in key by pressing "share" button in google sheets to share with the credential email or it wont work!
+"""
