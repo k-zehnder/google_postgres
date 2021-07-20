@@ -1,7 +1,6 @@
 import os
 import gspread
 import pandas as pd
-from gspread_pandas import Spread, Client
 from oauth2client.service_account import ServiceAccountCredentials
 import sqlalchemy
 from sqlalchemy import create_engine
@@ -13,44 +12,25 @@ import datetime
 """
 
 # input
-#cred_json = os.environ['json_path']
-cred_json = "/home/batman/Desktop/google_postgres/key/master_key.json"
+cred_json = "/home/batman/Desktop/google_postgres/key/master_key.json" #cred_json = os.environ['json_path']
 # TODO: accept arguments to initialize class with kwawgs
 class GoogleSheetHelper:
-    def __init__(self, key_path, spreadsheetName, sheetName):
+    def __init__(self, cred_json, spreadsheetName, sheetName):
         self.scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-        self.key_path = key_path
+        self.cred_json = cred_json
         self.spreadsheetName = spreadsheetName
         self.sheetName = sheetName
+        self.creds = ServiceAccountCredentials.from_json_keyfile_name(self.cred_json, self.scope)
+        self.client = gspread.authorize(self.creds)
 
     def sheetToDataframe(self):
         pass
 
     def getDataframe(self):
-        spreadsheet = client.open(self.spreadsheetName)
+        spreadsheet = self.client.open(self.spreadsheetName)
         sheet = spreadsheet.worksheet(self.sheetName)
         rows = sheet.get_all_records()
         return pd.DataFrame(rows)
-
-""" Function for gathering profile information from the Client"""
-# check data in spreadsheet
-scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-creds = ServiceAccountCredentials.from_json_keyfile_name(cred_json, scope)
-client = gspread.authorize(creds)
-
-# get worksheet name and specific sheet inside the worksheets name
-spreadsheetName = "google_postgres"
-sheetName = "time"
-
-# open appropriate spreadsheet
-spreadsheet = client.open(spreadsheetName)
-sheet = spreadsheet.worksheet(sheetName)
-rows = sheet.get_all_records()
-print(type(rows)) # list of dictionaries (ideal!)
-
-# convert dict rows to pandas dataframe
-dataframe = pd.DataFrame(rows)
-print(dataframe)
 
 df1 = GoogleSheetHelper(cred_json, "google_postgres", "existing")
 df2 = GoogleSheetHelper(cred_json, "google_postgres", "calls")
