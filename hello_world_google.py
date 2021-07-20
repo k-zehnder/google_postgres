@@ -7,7 +7,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.types import Integer, Text, String, DateTime
 import datetime
 
-cred_json = "/home/batman/Desktop/google_postgres/key/master_key.json" #cred_json = os.environ['json_path']
+#cred_json = os.environ['json_path']
+cred_json = "/home/batman/Desktop/google_postgres/key/master_key.json" 
 class GoogleSheetHelper:
     def __init__(self, cred_json, spreadsheetName, sheetName):
         self.scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
