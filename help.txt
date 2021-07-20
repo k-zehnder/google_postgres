@@ -1,0 +1,4 @@
+# get all worksheets in google sheets
+print(client.openall())
+
+# REMINDER: must share email located in key by pressing "share" button in google sheets to share with the credential email or it wont work!
