@@ -23,9 +23,6 @@ class GoogleSheetHelper:
         self.creds = ServiceAccountCredentials.from_json_keyfile_name(self.cred_json, self.scope)
         self.client = gspread.authorize(self.creds)
 
-    def sheetToDataframe(self):
-        pass
-
     def getDataframe(self):
         spreadsheet = self.client.open(self.spreadsheetName)
         sheet = spreadsheet.worksheet(self.sheetName)
