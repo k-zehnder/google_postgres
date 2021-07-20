@@ -7,9 +7,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.types import Integer, Text, String, DateTime
 import datetime
 
-"""
-# REMINDER: must share email located in key by pressing "share" button in google sheets to share with the credential email or it wont work!
-"""
 cred_json = "/home/batman/Desktop/google_postgres/key/master_key.json" #cred_json = os.environ['json_path']
 class GoogleSheetHelper:
     def __init__(self, cred_json, spreadsheetName, sheetName):
