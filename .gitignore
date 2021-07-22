@@ -1,5 +1,3 @@
-.env
-/key
-/__pycache__
-/data
-.vscode/
+/key/*
+/data/*
+/__pycache__/*
