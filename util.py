@@ -10,6 +10,7 @@ import datetime
 #cred_json = os.environ['json_path']
 cred_json = "/home/batman/Desktop/google_postgres/key/master_key.json" 
 class GoogleSheetHelper:
+    """Helper claas to pull data from googlesheets"""
     def __init__(self, cred_json, spreadsheetName, sheetName):
         self.scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
         self.cred_json = cred_json
@@ -19,18 +20,21 @@ class GoogleSheetHelper:
         self.client = gspread.authorize(self.creds)
 
     def getDataframe(self):
+        """Returns all rows data from sheet as dataframe"""
         spreadsheet = self.client.open(self.spreadsheetName)
         sheet = spreadsheet.worksheet(self.sheetName)
         rows = sheet.get_all_records()
         return pd.DataFrame(rows)
 
     def getDict(self):
+        """Returns all rows data from sheet as dictionary--one dict per row"""        
         spreadsheet = self.client.open(self.spreadsheetName)
         sheet = spreadsheet.worksheet(self.sheetName)
         rows = sheet.get_all_records()
         return rows
 
     def viewAllClientSheets(self):
+        """Returns sheets this gspread (self.client) authorized to view/edit"""
         available_sheets = self.client.openall()
         return [sheet.title for sheet in available_sheets]
 
