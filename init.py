@@ -17,7 +17,7 @@ df3 = GoogleSheetHelper(cred_json, "google_postgres", "time")
 print(df1.getDataframe().head())
 print("*" * 50)
 print(df2.getDataframe().head())
-print("*" * 50)
+print("*" * 40)
 print(df3.getDataframe().head())
 
 all_sheets = df1.viewAllClientSheets()
