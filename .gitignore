@@ -1,3 +1,4 @@
-**/key
-**/__pycache__
-**/data
+.env
+key/
+__pycache__/
+data/
