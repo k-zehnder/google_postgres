@@ -10,7 +10,7 @@ import datetime
 # import util for GpppgleSheetHelper
 from util import *
 
-cred_json = ""
+cred_json = "/home/batman/Desktop/google_postgres/key/master_key.json"
 #cred_json = os.environ.get("'GOOGLE_SHEET_KEY")
 df1 = GoogleSheetHelper(cred_json, "google_postgres", "existing")
 df2 = GoogleSheetHelper(cred_json, "google_postgres", "calls")
@@ -85,7 +85,7 @@ print(table_df.head())
 
 # time sheet inside Users worksheet
 time_df = df3.getDataframe() #dataframe # see above
-table_name = 'User_time'
+table_name = 'User_time' # + utc for unique backup?
 current_utc = datetime.datetime.utcnow()
 time_df["CreatedUTC"] = current_utc
 time_df.to_sql(
