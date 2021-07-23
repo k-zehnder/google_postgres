@@ -10,6 +10,7 @@ import datetime
 # import util for GpppgleSheetHelper
 from util import *
 
+cred_json = "/home/inthrustwetrust71/Desktop/google_postgres/key/master_key.json"
 df1 = GoogleSheetHelper(cred_json, "google_postgres", "existing")
 df2 = GoogleSheetHelper(cred_json, "google_postgres", "calls")
 df3 = GoogleSheetHelper(cred_json, "google_postgres", "time")
@@ -26,41 +27,41 @@ print(all_sheets)
 ###############################################################################
 # Now that we have data from googlesheetsAPI, insert to goanddo PostgresSQL
 ###############################################################################
-# host = "localhost"
-# port = 5432
-# username = "zelda"
-# password = "password"
-# database = "godo0" 
+host = "localhost"
+port = 5432
+username = "zelda"
+password = "password"
+database = "zelda" 
 
-# db_uri = f"postgresql://{username}:{password}@{host}:{port}/{database}"
-# engine = create_engine(db_uri, echo=True)
+db_uri = f"postgresql://{username}:{password}@{host}:{port}/{database}"
+engine = create_engine(db_uri, echo=True)
 
-# jobs_df = dataframe # see above
-# table_name = 'google_sheet_data'
-# current_utc = datetime.datetime.utcnow()
-# jobs_df["CreatedUTC"] = current_utc
-# jobs_df.to_sql(
-#     table_name,
-#     engine,
-#     if_exists='replace',
-#     index=False,
-#     chunksize=500,
-#     dtype={
-#         "Username": String(500),
-#         "Timezone": String(500),
-#         "UTC start": DateTime,
-#         "UTC end":  DateTime,
-#         "Number": String(500),
-#         "CreatedUTC": DateTime
-#     }
-# )
+jobs_df = dataframe # see above
+table_name = 'google_sheet_data'
+current_utc = datetime.datetime.utcnow()
+jobs_df["CreatedUTC"] = current_utc
+jobs_df.to_sql(
+    table_name,
+    engine,
+    if_exists='replace',
+    index=False,
+    chunksize=500,
+    dtype={
+        "Username": String(500),
+        "Timezone": String(500),
+        "UTC start": DateTime,
+        "UTC end":  DateTime,
+        "Number": String(500),
+        "CreatedUTC": DateTime
+    }
+)
 
-# table_df = pd.read_sql_table(
-#     table_name,
-#     con=engine
-# )
+table_df = pd.read_sql_table(
+    table_name,
+    con=engine
+)
 
-# print(table_df.head())
+print(table_df.head())
 
 """
 Why: there is a limit on the scalability of the architecture in the google spreadsheet. 
