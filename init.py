@@ -10,8 +10,8 @@ import datetime
 # import util for GpppgleSheetHelper
 from util import *
 
-#cred_json = "
-cred_json = os.environ.get("'GOOGLE_SHEET_KEY")
+cred_json = ""
+#cred_json = os.environ.get("'GOOGLE_SHEET_KEY")
 df1 = GoogleSheetHelper(cred_json, "google_postgres", "existing")
 df2 = GoogleSheetHelper(cred_json, "google_postgres", "calls")
 df3 = GoogleSheetHelper(cred_json, "google_postgres", "time")
@@ -32,7 +32,9 @@ print(df3.getDataframe().columns)
 ###############################################################################
 # Now that we have data from googlesheetsAPI, insert to goanddo PostgresSQL
 ###############################################################################
-host = os.environ.get("IP_TEST")
+IP_TEST = "localhost"
+#host = os.environ.get("IP_TEST")
+host = IP_TEST
 port = 5432
 username = "zelda"
 password = "password"
@@ -41,11 +43,52 @@ database = "emptydb"
 db_uri = f"postgresql://{username}:{password}@{host}:{port}/{database}"
 engine = create_engine(db_uri, echo=True)
 
-jobs_df = df2.getDataframe() #dataframe # see above
-table_name = 'patient0_data_macbook'
+# existing sheet inside Users worksheet
+existing_df = df1.getDataframe() #dataframe # see above
+table_name = 'User_existing'
 current_utc = datetime.datetime.utcnow()
-jobs_df["CreatedUTC"] = current_utc
-jobs_df.to_sql(
+existing_df["CreatedUTC"] = current_utc
+existing_df.to_sql(
+    table_name,
+    engine,
+    if_exists='replace',
+    index=False,
+    chunksize=500,
+)
+
+table_df = pd.read_sql_table(
+    table_name,
+    con=engine
+)
+
+print(table_df.head())
+
+# calls sheet inside Users worksheet
+calls_df = df2.getDataframe() #dataframe # see above
+table_name = 'User_calls'
+current_utc = datetime.datetime.utcnow()
+calls_df["CreatedUTC"] = current_utc
+calls_df.to_sql(
+    table_name,
+    engine,
+    if_exists='replace',
+    index=False,
+    chunksize=500,
+)
+
+table_df = pd.read_sql_table(
+    table_name,
+    con=engine
+)
+
+print(table_df.head())
+
+# time sheet inside Users worksheet
+time_df = df3.getDataframe() #dataframe # see above
+table_name = 'User_time'
+current_utc = datetime.datetime.utcnow()
+time_df["CreatedUTC"] = current_utc
+time_df.to_sql(
     table_name,
     engine,
     if_exists='replace',
