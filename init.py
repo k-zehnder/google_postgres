@@ -2,7 +2,6 @@ import os
 import gspread
 import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
-import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.types import Integer, Text, String, DateTime
 import datetime
@@ -15,26 +14,22 @@ cred_json = "/home/batman/Desktop/google_postgres/key/master_key.json"
 df1 = GoogleSheetHelper(cred_json, "google_postgres", "existing")
 df2 = GoogleSheetHelper(cred_json, "google_postgres", "calls")
 df3 = GoogleSheetHelper(cred_json, "google_postgres", "time")
+#print(df1.getDataframe().head())
 
-print(df1.getDataframe().head())
-print("*" * 50)
-print(df2.getDataframe().head())
-print("*" * 50)
-print(df3.getDataframe().head())
-
+# all worksheets avaialble for this google key
 all_sheets = df1.viewAllClientSheets()
-print(all_sheets)
+#print(all_sheets)
 
+# sanity check
 print("[x] printing columns...")
 print(df1.getDataframe().columns)
 print(df2.getDataframe().columns)
 print(df3.getDataframe().columns)
+
 ###############################################################################
 # Now that we have data from googlesheetsAPI, insert to goanddo PostgresSQL
 ###############################################################################
-IP_TEST = "localhost"
-#host = os.environ.get("IP_TEST")
-host = IP_TEST
+host = "localhost"
 port = 5432
 username = "zelda"
 password = "password"
