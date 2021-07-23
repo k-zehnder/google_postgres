@@ -21,3 +21,12 @@ available_sheets = client.find_spreadsheet_files_in_folders('example dir')
 spreads = []
 for sheet in available_sheets.get('example dir', []):
     spreads.append(Spread(sheet['id'], client=client))
+
+    # dtype={
+    #     "Username": String(500),
+    #     "Timezone": String(500),
+    #     "UTC start": DateTime,
+    #     "UTC end":  DateTime,
+    #     "Number": String(500),
+    #     "CreatedUTC": DateTime
+    # }

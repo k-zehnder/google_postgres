@@ -24,20 +24,24 @@ print(df3.getDataframe().head())
 all_sheets = df1.viewAllClientSheets()
 print(all_sheets)
 
+print("[x] printing columns...")
+print(df1.getDataframe().columns)
+print(df2.getDataframe().columns)
+print(df3.getDataframe().columns)
 ###############################################################################
 # Now that we have data from googlesheetsAPI, insert to goanddo PostgresSQL
 ###############################################################################
-host = "localhost"
+host = os.environ.get("IP_TEST")
 port = 5432
 username = "zelda"
 password = "password"
-database = "zelda" 
+database = "emptydb" 
 
 db_uri = f"postgresql://{username}:{password}@{host}:{port}/{database}"
 engine = create_engine(db_uri, echo=True)
 
-jobs_df = dataframe # see above
-table_name = 'google_sheet_data'
+jobs_df = df1.getDataframe() #dataframe # see above
+table_name = 'patient0_data_macbook'
 current_utc = datetime.datetime.utcnow()
 jobs_df["CreatedUTC"] = current_utc
 jobs_df.to_sql(
@@ -46,14 +50,14 @@ jobs_df.to_sql(
     if_exists='replace',
     index=False,
     chunksize=500,
-    dtype={
-        "Username": String(500),
-        "Timezone": String(500),
-        "UTC start": DateTime,
-        "UTC end":  DateTime,
-        "Number": String(500),
-        "CreatedUTC": DateTime
-    }
+    # dtype={
+    #     "Username": String(500),
+    #     "Timezone": String(500),
+    #     "UTC start": DateTime,
+    #     "UTC end":  DateTime,
+    #     "Number": String(500),
+    #     "CreatedUTC": DateTime
+    # }
 )
 
 table_df = pd.read_sql_table(
