@@ -50,14 +50,6 @@ jobs_df.to_sql(
     if_exists='replace',
     index=False,
     chunksize=500,
-    # dtype={
-    #     "Username": String(500),
-    #     "Timezone": String(500),
-    #     "UTC start": DateTime,
-    #     "UTC end":  DateTime,
-    #     "Number": String(500),
-    #     "CreatedUTC": DateTime
-    # }
 )
 
 table_df = pd.read_sql_table(
