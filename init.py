@@ -10,7 +10,8 @@ import datetime
 # import util for GpppgleSheetHelper
 from util import *
 
-cred_json = "/home/inthrustwetrust71/Desktop/google_postgres/key/master_key.json"
+#cred_json = "
+cred_json = os.environ.get("'GOOGLE_SHEET_KEY")
 df1 = GoogleSheetHelper(cred_json, "google_postgres", "existing")
 df2 = GoogleSheetHelper(cred_json, "google_postgres", "calls")
 df3 = GoogleSheetHelper(cred_json, "google_postgres", "time")
@@ -40,7 +41,7 @@ database = "emptydb"
 db_uri = f"postgresql://{username}:{password}@{host}:{port}/{database}"
 engine = create_engine(db_uri, echo=True)
 
-jobs_df = df1.getDataframe() #dataframe # see above
+jobs_df = df2.getDataframe() #dataframe # see above
 table_name = 'patient0_data_macbook'
 current_utc = datetime.datetime.utcnow()
 jobs_df["CreatedUTC"] = current_utc
