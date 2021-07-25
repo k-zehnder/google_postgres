@@ -9,7 +9,7 @@ import datetime
 # import util for GpppgleSheetHelper
 from util import *
 
-cred_json = "/home/batman/Desktop/google_postgres/key/master_key.json"
+cred_json = "/home/inthrustwetrust71/Desktop/google_postgres/key/master_key.json"
 #cred_json = os.environ.get("'GOOGLE_SHEET_KEY")
 df1 = GoogleSheetHelper(cred_json, "google_postgres", "existing")
 df2 = GoogleSheetHelper(cred_json, "google_postgres", "calls")
