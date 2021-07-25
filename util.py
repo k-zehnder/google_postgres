@@ -18,7 +18,7 @@ from sqlalchemy.types import Integer, Text, String, DateTime
 import datetime
 
 #cred_json = os.environ['json_path']
-cred_json = "/home/batman/Desktop/google_postgres/key/master_key.json" 
+cred_json = "/home/inthrustwetrust71/Desktop/google_postgres/key/master_key.json" 
 class GoogleSheetHelper:
     """Helper claas to pull data from googlesheets"""
     def __init__(self, cred_json, spreadsheetName, sheetName):
@@ -48,7 +48,7 @@ class GoogleSheetHelper:
         available_sheets = self.client.openall()
         return [sheet.title for sheet in available_sheets]
 
-
+"""
 df1 = GoogleSheetHelper(cred_json, "google_postgres", "existing")
 df2 = GoogleSheetHelper(cred_json, "google_postgres", "calls")
 df3 = GoogleSheetHelper(cred_json, "google_postgres", "time")
@@ -126,7 +126,7 @@ table_df = pd.read_sql_table(
     con=engine
 )
 
-print(table_df.head())
+print(table_df.head())"""
 
 """
 Why: there is a limit on the scalability of the architecture in the google spreadsheet. 

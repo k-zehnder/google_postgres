@@ -24,26 +24,39 @@ database = "backupdb"
 db_uri = f"postgresql://{username}:{password}@{host}:{port}/{database}"
 engine = create_engine(db_uri, echo=True)
 
+# data dict
+# data = [
+#         {"fullsheet" : "google_postgres", "subsheet" : "existing"},
+#         {"fullsheet" : "google_postgres", "subsheet" : "calls"},
+#         {"fullsheet" : "google_postgres", "subsheet" : "time"},
+# ]
+# for d in data:
+#   gsh = GoogleSheetHelper(cred_json, d["fullsheet"], d["subsheet"])
+#   
+#   # get dataframe
+#   gsh.getDataFrame()
+#   table_name = 'backupdb_table'
+#   users_df.to_sql(
+#       table_name,
+#       engine,
+#       if_exists='replace',
+#       index=False,
+#       chunksize=500,
+#)
+
 # gsh + to postgres
 cred_json = "/home/inthrustwetrust71/Desktop/google_postgres/key/master_key.json" 
 gsh = GoogleSheetHelper(cred_json, "google_postgres", "existing")
 # ^^ getting only one of the sheets of the 3 available
 
 users_df = gsh.getDataframe()
-table_name = 'google_sheet_data'
+table_name = 'backupdb_table'
 users_df.to_sql(
     table_name,
     engine,
     if_exists='replace',
     index=False,
     chunksize=500,
-    dtype={
-        "Username": String(500),
-        "Timezone": String(500),
-        "UTC start": DateTime,
-        "UTC end":  DateTime,
-        "Number": String(500),
-    }
 )
 
 table_df = pd.read_sql_table(

@@ -316,11 +316,12 @@ def main():
     restore_filename = '/tmp/restore.dump.gz'
     restore_uncompressed = '/tmp/restore.dump'
     local_storage_path = config.get('local_storage', 'path', fallback='./backups/')
-
+    backup_path = config.get('local_storage', 'path', fallback='./backups/')
     manager_config = {
         #'AWS_BUCKET_NAME': aws_bucket_name,
         #'AWS_BUCKET_PATH': aws_bucket_path,
-        'BACKUP_PATH': '/tmp/',
+        #'BACKUP_PATH': '/tmp/',
+        'BACKUP_PATH': backup_path,
         'LOCAL_BACKUP_PATH': local_storage_path
     }
 
