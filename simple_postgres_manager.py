@@ -6,7 +6,7 @@ import os
 import subprocess
 import datetime
 
-DB_NAME = 'emptydb'  # your db name
+DB_NAME = 'work'  # your db name
 DB_USER = 'zelda' # you db user
 DB_HOST = "localhost"
 DB_PORT = 5432

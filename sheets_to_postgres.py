@@ -46,11 +46,11 @@ engine = create_engine(db_uri, echo=True)
 
 # gsh + to postgres
 cred_json = "/home/batman/Desktop/google_postgres/key/master_key.json" 
-gsh = GoogleSheetHelper(cred_json, "google_postgres", "existing")
+gsh = GoogleSheetHelper(cred_json, "google_postgres", "time")
 # ^^ getting only one of the sheets of the 3 available
 
 users_df = gsh.getDataframe()
-table_name = 'backupdb_table'
+table_name = 'time_table'
 users_df.to_sql(
     table_name,
     engine,

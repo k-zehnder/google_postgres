@@ -7,3 +7,19 @@ pg_dump --host="localhost" --port=5432 --username=zelda --dbname "work" --no-own
 # restore (mint database should be empty, will be populated by the dumped file you reference)
 pg_restore -h "localhost" -d mint -U zelda "/home/batman/Desktop/google_postgres/pgbackup2021-07-25-1226.dump"
 
+
+
+1.
+# create db in postgres google sheet data will go into
+# sheets to postgres (sheets_to_postgres.py)
+
+2.
+# dump db with (simple_postgres_manager.py)
+# using DB_NAME of the db you just inserted to from google sheets
+
+3.
+# create new db that the dumped db will now populate ("empty work")
+# restore backup to NEW db you created thats empty that will be populated with the backup just created ("work" in this example will populate "empty_work")
+# run >>>pg_restore -h "localhost" -d empty_work -U zelda "/home/batman/Desktop/google_postgres/pgbackup2021-07-25-1333.dump"
+
+#Note: if you restore dumped db to a db that already has tables in it, it will just add that table and keep whatever tables there that already exist
