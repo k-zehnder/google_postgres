@@ -23,3 +23,4 @@ pg_restore -h "localhost" -d mint -U zelda "/home/batman/Desktop/google_postgres
 # run >>>pg_restore -h "localhost" -d empty_work -U zelda "/home/batman/Desktop/google_postgres/pgbackup2021-07-25-1333.dump"
 
 #Note: if you restore dumped db to a db that already has tables in it, it will just add that table and keep whatever tables there that already exist
+
