@@ -1,0 +1,5 @@
+# dump
+pg_dump --host="localhost" --port=5432 --username=zelda --dbname "work" --no-owner --format=c --file=pgbackup`date +%F-%H%M`.dump 
+
+# restore
+pg_restore -h "localhost" -d mint -U zelda "/home/batman/Desktop/google_postgres/pgbackup2021-07-25-1226.dump"

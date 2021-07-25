@@ -18,7 +18,7 @@ host = "localhost"
 port = 5432
 username = "zelda"
 password = "password"
-database = "backupdb" 
+database = "work" 
 
 # db uri + engine
 db_uri = f"postgresql://{username}:{password}@{host}:{port}/{database}"
@@ -45,7 +45,7 @@ engine = create_engine(db_uri, echo=True)
 #)
 
 # gsh + to postgres
-cred_json = "/home/inthrustwetrust71/Desktop/google_postgres/key/master_key.json" 
+cred_json = "/home/batman/Desktop/google_postgres/key/master_key.json" 
 gsh = GoogleSheetHelper(cred_json, "google_postgres", "existing")
 # ^^ getting only one of the sheets of the 3 available
 
