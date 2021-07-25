@@ -1,5 +1,23 @@
-# dump
+# dump .dump
 pg_dump --host="localhost" --port=5432 --username=zelda --dbname "work" --no-owner --format=c --file=pgbackup`date +%F-%H%M`.dump 
 
-# restore
+# can also dump to .sql
+pg_dump --host="localhost" --port=5432 --username=zelda --dbname "work" --no-owner --format=c --file=pgbackup`date +%F-%H%M`.sql
+
+# restore (mint database should be empty, will be populated by the dumped file you reference)
 pg_restore -h "localhost" -d mint -U zelda "/home/batman/Desktop/google_postgres/pgbackup2021-07-25-1226.dump"
+
+# def dump_schema(host, dbname, user, password, **kwargs):
+#     command = f'pg_dump -h={host} ' \
+#         f'--dbname={dbname} ' \
+#         f'--username={user} ' \
+#         f'--no-password ' \
+#         f'--format=c ' \
+#         f'--file=/tmp/schema.dmp '
+
+#     proc = Popen(command, shell=True, env={
+#         'PGPASSWORD': password
+#     })
+#     proc.wait()
+
+# print(dump_schema(host, database, username, password))
